@@ -1,0 +1,24 @@
+syntax = "proto3";
+package leishmaniapp.auth;
+
+import "model.proto";
+
+/// JWT token claims
+message TokenPayload {
+    sint64 exp = 1;
+    sint64 iat = 2;
+    string name = 3;
+    string email = 4;
+}
+
+/// Authentication request
+message AuthRequest {
+    string email = 1;
+    string password = 2;
+}
+
+/// Authentication response
+message AuthResponse {
+    string token = 1;
+    leishmaniapp.model.Specialist specialist = 2;
+}
