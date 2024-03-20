@@ -1,6 +1,11 @@
 syntax = "proto3";
 package leishmaniapp.model;
 
+option java_package = "com.leishmaniapp.protobuf.model";
+option java_multiple_files = true;
+option csharp_namespace = "Leishmaniapp.Protobuf.Model";
+option go_package = "leishmaniapp/protobuf;proto";
+
 /// Specialist information
 message Specialist {
     string email = 1;

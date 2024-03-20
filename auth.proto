@@ -1,6 +1,11 @@
 syntax = "proto3";
 package leishmaniapp.auth;
 
+option java_package = "com.leishmaniapp.protobuf.auth";
+option java_multiple_files = true;
+option csharp_namespace = "Leishmaniapp.Protobuf.Auth";
+option go_package = "leishmaniapp/protobuf;proto";
+
 import "model.proto";
 
 /// JWT token claims
