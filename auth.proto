@@ -12,8 +12,9 @@ import "model.proto";
 message TokenPayload {
     sint64 exp = 1;
     sint64 iat = 2;
-    string name = 3;
-    string email = 4;
+    sint64 nbf = 3;
+    string name = 4;
+    string email = 5;
 }
 
 /// Authentication request
