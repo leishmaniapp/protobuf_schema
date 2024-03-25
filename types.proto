@@ -7,15 +7,18 @@ option csharp_namespace = "Leishmaniapp.Protobuf.Types";
 option go_package = "leishmaniapp/protobuf;proto";
 
 /// Error codes for the [leishmaniapp.types.StatusResponse]
+/// Same as HTTP status codes + Extras
 enum StatusCode {
-    // Request successfully completed
-    OK = 0;
-    /// Authentication fails due to bad credentials
-    BAD_CREDENTIALS = 1;
-    /// Authentication token was provided but not valid
-    INVALID_TOKEN = 2;
-    /// Request could not be completed because user was not authenticated
-    UNAUTHENTICATED = 3;
+    UNSPECIFIED = 0;
+    OK = 200;
+    BAD_REQUEST = 400;
+    /// Bad credentials for authentication
+    FORBIDDEN = 403;
+    /// No authentication header provided
+    UNAUTHENTICATED = 401;
+    /// Authentication header was provided but the token was invalid
+    INVALID_TOKEN = 498;
+    INTERNAL_SERVER_ERROR = 500;
 }
 
 /// Return a status code with an optional description of the error
