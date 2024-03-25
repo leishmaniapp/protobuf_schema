@@ -6,17 +6,18 @@ option java_multiple_files = true;
 option csharp_namespace = "Leishmaniapp.Protobuf.Auth";
 option go_package = "leishmaniapp/protobuf;proto";
 
-import "google.protobuf.Status";
 import "model.proto";
+import "types.proto";
 
 /// Authentication service
 /// Generates and validates JWT tokens
 service AuthService {
     /// Authenticate an user and return its token
     rpc AuthenticateUser(AuthRequest) returns (AuthResponse);
+    
     /// Verify the authenticity of a token
-    /// Returns OK(0) if the token is valid, UNAUTHENTICATED(16) if the token is invalid
-    rpc VerifyToken(VerificationRequest) returns (google.protobuf.Status);
+    /// Returns OK if the token is valid, INVALID_TOKEN if the token is invalid
+    rpc VerifyToken(VerificationRequest) returns (types.StatusResponse);
 }
 
 /// Authentication request payload
@@ -27,7 +28,7 @@ message AuthRequest {
 
 /// Server response for the GRPC auth service
 message AuthResponse {
-    google.protobuf.Status status = 1;
+    types.StatusResponse status = 1;
     optional string token = 2;
 }
 
@@ -42,5 +43,5 @@ message TokenPayload {
     sint64 exp = 1;
     sint64 iat = 2;
     sint64 nbf = 3;
-    leishmaniapp.model.Specialist specialist = 4;
+    model.Specialist specialist = 4;
 }

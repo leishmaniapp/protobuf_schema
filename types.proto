@@ -1,0 +1,25 @@
+syntax = "proto3";
+package leishmaniapp.types;
+
+option java_package = "com.leishmaniapp.protobuf.types";
+option java_multiple_files = true;
+option csharp_namespace = "Leishmaniapp.Protobuf.Types";
+option go_package = "leishmaniapp/protobuf;proto";
+
+/// Error codes for the [leishmaniapp.types.StatusResponse]
+enum StatusCode {
+    // Request successfully completed
+    OK = 0;
+    /// Authentication fails due to bad credentials
+    BAD_CREDENTIALS = 1;
+    /// Authentication token was provided but not valid
+    INVALID_TOKEN = 2;
+    /// Request could not be completed because user was not authenticated
+    UNAUTHENTICATED = 3;
+}
+
+/// Return a status code with an optional description of the error
+message StatusResponse {
+    StatusCode code = 1;
+    optional string description = 2;
+}
