@@ -6,6 +6,7 @@ option java_multiple_files = true;
 option csharp_namespace = "Leishmaniapp.Protobuf.Auth";
 option go_package = "leishmaniapp/protobuf;proto";
 
+import "google.protobuf.Status";
 import "model.proto";
 
 /// Authentication service
@@ -14,7 +15,8 @@ service AuthService {
     /// Authenticate an user and return its token
     rpc AuthenticateUser(AuthRequest) returns (AuthResponse);
     /// Verify the authenticity of a token
-    rpc VerifyToken(VerificationRequest) returns (VerificationResponse);
+    /// Returns OK(0) if the token is valid, UNAUTHENTICATED(16) if the token is invalid
+    rpc VerifyToken(VerificationRequest) returns (google.protobuf.Status);
 }
 
 /// Authentication request payload
@@ -25,17 +27,13 @@ message AuthRequest {
 
 /// Server response for the GRPC auth service
 message AuthResponse {
-    optional string token = 1;
+    google.protobuf.Status status = 1;
+    optional string token = 2;
 }
 
-/// Request to check a token validity
+/// Request to check a token validation
 message VerificationRequest {
     string token = 1;
-}
-
-/// Response for the GRPC auth service verification request
-message VerificationResponse {
-    bool valid_token = 1;
 }
 
 /// JWT token payload (registered + custom claims)
