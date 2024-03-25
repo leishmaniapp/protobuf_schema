@@ -8,16 +8,41 @@ option go_package = "leishmaniapp/protobuf;proto";
 
 import "model.proto";
 
-/// JWT token claims
+/// Authentication service
+/// Generates and validates JWT tokens
+service AuthService {
+    /// Authenticate an user and return its token
+    rpc AuthenticateUser(AuthRequest) returns (AuthResponse);
+    /// Verify the authenticity of a token
+    rpc VerifyToken(VerificationRequest) returns (VerificationResponse);
+}
+
+/// Authentication request payload
+message AuthRequest {
+    string email = 1;
+    string password = 2;
+}
+
+/// Server response for the GRPC auth service
+message AuthResponse {
+    optional string token = 1;
+}
+
+/// Request to check a token validity
+message VerificationRequest {
+    string token = 1;
+}
+
+/// Response for the GRPC auth service verification request
+message VerificationResponse {
+    bool valid_token = 1;
+}
+
+/// JWT token payload (registered + custom claims)
+/// Contains the information of the authenticated specialist
 message TokenPayload {
     sint64 exp = 1;
     sint64 iat = 2;
     sint64 nbf = 3;
     leishmaniapp.model.Specialist specialist = 4;
-}
-
-/// Authentication request
-message AuthRequest {
-    string email = 1;
-    string password = 2;
 }
