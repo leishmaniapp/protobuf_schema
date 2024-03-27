@@ -13,7 +13,7 @@ import "types.proto";
 /// Generates and validates JWT tokens
 service AuthService {
     /// Authenticate an user and return its token
-    rpc AuthenticateUser(AuthRequest) returns (AuthResponse);
+    rpc Authenticate(AuthRequest) returns (AuthResponse);
     
     /// Verify the authenticity of a token
     /// Returns OK if the token is valid, INVALID_TOKEN if the token is invalid
@@ -42,6 +42,5 @@ message VerificationRequest {
 message TokenPayload {
     sint64 exp = 1;
     sint64 iat = 2;
-    sint64 nbf = 3;
     model.Specialist specialist = 4;
 }
