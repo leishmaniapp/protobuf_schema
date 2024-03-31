@@ -9,7 +9,17 @@ option go_package = "leishmaniapp/protobuf;proto";
 import "model.proto";
 import "types.proto";
 
+service AnalysisService {
+    /// Start a streaming channel for analysis
+    rpc StartAnalysis(stream AnalysisRequest) returns (stream AnalysisResponse);
+}
+
 message AnalysisRequest {
-    model.ImageMetadata metadata = 2;
-    types.ImageBytes image = 3;
+    model.ImageMetadata metadata = 1;
+    types.ImageBytes image = 2;
+}
+
+message AnalysisResponse {
+    model.ImageMetadata metadata = 1;
+    map<string, types.ListOfCoordinates> results = 2;
 }

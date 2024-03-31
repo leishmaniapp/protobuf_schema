@@ -32,3 +32,14 @@ message ImageBytes {
     bytes data = 3;
     string mime = 4;
 }
+
+/// Pixel coordinates of an element in an image
+message Coordinates {
+    uint32 x = 1;
+    uint32 y = 2;
+}
+
+/// Wrapper around coordinates for maps
+message ListOfCoordinates {
+    repeated Coordinates coordinates = 1;
+}
