@@ -1,0 +1,22 @@
+syntax = "proto3";
+package leishmaniapp.cloud;
+
+option java_package = "com.leishmaniapp.protobuf.samples";
+option java_multiple_files = true;
+option csharp_namespace = "Leishmaniapp.Protobuf.Samples";
+option go_package = "leishmaniapp/protobuf;proto";
+
+import "model.proto";
+import "types.proto";
+
+service SampleService {
+    /// Store the given sample in storage
+    rpc StoreImageSample(ImageSampleRequest) returns (types.StatusResponse);
+    /// Update sample data on storage
+    rpc UpdateSample(model.Sample) returns (types.StatusResponse);
+}
+
+message ImageSampleRequest {
+    model.Sample sample = 1;
+    types.ImageBytes image = 2;
+}

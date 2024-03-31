@@ -6,6 +6,8 @@ option java_multiple_files = true;
 option csharp_namespace = "Leishmaniapp.Protobuf.Model";
 option go_package = "leishmaniapp/protobuf;proto";
 
+import "types.proto";
+
 /// Specialist information
 message Specialist {
     string email = 1;
@@ -25,4 +27,23 @@ message ImageMetadata {
     sint64 date = 4;
     /// Sample size in pixels (only one side - height and width must be equal
     uint32 size = 5;
+}
+
+/// Current analysis stage
+enum AnalysisStage {
+    /// Failed to process sample
+    ERROR = 0;
+    /// Sent to Diagnosis Queue System but still no response
+    ANALYZING = 2;
+    /// Sample was analyzed but still not delivered to client
+    DELIVER = 3;
+    /// Sample was successfully analyzed and delivered
+    ANALYZED = 4;
+}
+
+/// Image sample with results
+message Sample {
+    ImageMetadata metadata = 1;
+    AnalysisStage stage = 2;
+    map<string, types.ListOfCoordinates> results = 3;
 }
