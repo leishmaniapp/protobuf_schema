@@ -12,3 +12,17 @@ message Specialist {
     string name = 2;
     repeated string diseases = 3;
 }
+
+/// Image sample metadata
+message ImageMetadata {
+    /// Diagnosis UUID
+    string diagnosis = 1;
+    /// Sample number in diagnosis
+    uint32 sample = 2;
+    /// Disease identifier
+    string disease = 3;
+    /// DateTime in Unix time encoding
+    sint64 date = 4;
+    /// Sample size in pixels (only one side - height and width must be equal
+    uint32 size = 5;
+}

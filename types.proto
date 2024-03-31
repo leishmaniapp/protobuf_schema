@@ -26,3 +26,9 @@ message StatusResponse {
     StatusCode code = 1;
     optional string description = 2;
 }
+
+/// Image metadata
+message ImageBytes {
+    bytes data = 3;
+    string mime = 4;
+}

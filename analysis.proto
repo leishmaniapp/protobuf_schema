@@ -1,0 +1,15 @@
+syntax = "proto3";
+package leishmaniapp.cloud;
+
+option java_package = "com.leishmaniapp.protobuf.analysis";
+option java_multiple_files = true;
+option csharp_namespace = "Leishmaniapp.Protobuf.Analysis";
+option go_package = "leishmaniapp/protobuf;proto";
+
+import "model.proto";
+import "types.proto";
+
+message AnalysisRequest {
+    model.ImageMetadata metadata = 2;
+    types.ImageBytes image = 3;
+}
