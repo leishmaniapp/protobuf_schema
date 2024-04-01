@@ -16,6 +16,8 @@ enum StatusCode {
     FORBIDDEN = 403;
     /// No authentication header provided
     UNAUTHENTICATED = 401;
+    /// The requested resources did not exist or was not found
+    NOT_FOUND = 404;
     /// Authentication header was provided but the token was invalid
     INVALID_TOKEN = 498;
     INTERNAL_SERVER_ERROR = 500;
