@@ -1,10 +1,10 @@
 syntax = "proto3";
-package leishmaniapp.auth;
+package leishmaniapp.cloud.auth;
 
-option java_package = "com.leishmaniapp.protobuf.auth";
+option java_package = "com.leishmaniapp.cloud.auth";
 option java_multiple_files = true;
-option csharp_namespace = "Leishmaniapp.Protobuf.Auth";
-option go_package = "leishmaniapp/protobuf;proto";
+option csharp_namespace = "Leishmaniapp.Cloud.Auth";
+option go_package = "leishmaniapp/cloud;proto";
 
 import "model.proto";
 import "types.proto";

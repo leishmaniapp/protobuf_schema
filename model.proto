@@ -1,7 +1,7 @@
 syntax = "proto3";
-package leishmaniapp.model;
+package leishmaniapp.cloud.model;
 
-option java_package = "com.leishmaniapp.protobuf.model";
+option java_package = "com.leishmaniapp.cloud.model";
 option java_multiple_files = true;
 option csharp_namespace = "Leishmaniapp.Protobuf.Model";
 option go_package = "leishmaniapp/protobuf;proto";
@@ -13,6 +13,43 @@ message Specialist {
     string email = 1;
     string name = 2;
     repeated string diseases = 3;
+}
+
+/// Diagnosis information
+message Diagnosis {
+
+    /// Specialist without allowed diseases
+    message SimpleSpecialist {
+        string email = 1;
+        string name = 2;
+    }
+
+    /// Different results for diagnosis
+    message DiagnosisResults {
+        /// Positive or negative diagnosis given by the specialist
+        bool specialist_result = 1;
+        /// Name of the element and total amount of that element found
+        map<string, int32> specialist_elements = 2;
+        /// Positive or negative diagnosis given by the model
+        bool model_result = 3;
+        /// Name of the element and total amount of that element found
+        map<string, int32> model_elements = 4;
+    }
+
+    /// UUID identifier
+    string id = 1;
+    /// Disease identifier
+    string disease = 2;
+    /// Specialist email and name
+    SimpleSpecialist specialist = 3;
+    // Patient identification encoded for privacy
+    string patient_hash = 4;
+    /// DateTime in Unix time encoding
+    sint64 date = 5;
+    /// Specialist remarks
+    optional string remarks = 6;
+    /// Results (true/false) and quantities
+    DiagnosisResults results = 7;
 }
 
 /// Image sample metadata
@@ -31,6 +68,8 @@ message ImageMetadata {
 
 /// Current analysis stage
 enum AnalysisStage {
+    reserved 1;
+    
     /// Failed to process sample
     ERROR = 0;
     /// Sent to Diagnosis Queue System but still no response
