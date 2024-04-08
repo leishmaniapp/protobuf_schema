@@ -14,9 +14,28 @@ service SampleService {
     rpc StoreImageSample(ImageSampleRequest) returns (types.StatusResponse);
     /// Update sample data on storage
     rpc UpdateSample(model.Sample) returns (types.StatusResponse);
+    /// Get a specific sample
+    rpc GetSample(SampleRequest) returns (SampleResponse);
+    /// Delete a specific sample
+    rpc DeleteSample(SampleRequest) returns (SampleResponse);
 }
 
 message ImageSampleRequest {
     model.Sample sample = 1;
     types.ImageBytes image = 2;
+}
+
+message SampleRequest {
+    /// Diagnosis UUID
+    string diagnosis = 1;
+    /// Sample number in diagnosis
+    uint32 sample = 2;
+}
+
+message SampleResponse {
+    /// Reserved for [types.ImageBytes] if required
+    reserved 3;
+    
+    types.StatusResponse status = 1;
+    optional model.Sample sample = 2;
 }
