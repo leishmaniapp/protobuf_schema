@@ -9,6 +9,7 @@ option go_package = "leishmaniapp/cloud;proto";
 import "model.proto";
 import "types.proto";
 
+/// Sample manipulation service
 service SampleService {
     /// Store the given sample in storage
     rpc StoreImageSample(ImageSampleRequest) returns (types.StatusResponse);
@@ -33,7 +34,7 @@ message SampleRequest {
 }
 
 message SampleResponse {
-    /// Reserved for [types.ImageBytes] if required
+    /// Reserved for [types.ImageBytes] if required in the future
     reserved 3;
     
     types.StatusResponse status = 1;
