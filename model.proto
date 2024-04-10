@@ -3,8 +3,8 @@ package leishmaniapp.cloud.model;
 
 option java_package = "com.leishmaniapp.cloud.model";
 option java_multiple_files = true;
-option csharp_namespace = "Leishmaniapp.Protobuf.Model";
-option go_package = "leishmaniapp/protobuf;proto";
+option csharp_namespace = "Leishmaniapp.Cloud.Model";
+option go_package = "leishmaniapp.cloud;proto";
 
 import "types.proto";
 

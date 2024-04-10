@@ -4,7 +4,7 @@ package leishmaniapp.cloud.analysis;
 option java_package = "com.leishmaniapp.cloud.analysis";
 option java_multiple_files = true;
 option csharp_namespace = "Leishmaniapp.Cloud.Analysis";
-option go_package = "leishmaniapp/cloud;proto";
+option go_package = "leishmaniapp.cloud;proto";
 
 import "model.proto";
 import "types.proto";

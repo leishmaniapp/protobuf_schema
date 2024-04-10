@@ -4,7 +4,7 @@ package leishmaniapp.cloud.types;
 option java_package = "com.leishmaniapp.cloud.types";
 option java_multiple_files = true;
 option csharp_namespace = "Leishmaniapp.Cloud.Types";
-option go_package = "leishmaniapp/cloud;proto";
+option go_package = "leishmaniapp.cloud;proto";
 
 /// Error codes for the [leishmaniapp.types.StatusResponse]
 /// Same as HTTP status codes + Extras
