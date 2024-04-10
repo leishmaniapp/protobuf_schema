@@ -12,35 +12,36 @@ import "types.proto";
 /// Authentication service
 /// Generates and validates JWT tokens
 service AuthService {
-    /// Authenticate an user and return its token
-    rpc Authenticate(AuthRequest) returns (AuthResponse);
-    
-    /// Verify the authenticity of a token
-    /// Returns OK if the token is valid, INVALID_TOKEN if the token is invalid
-    rpc VerifyToken(VerificationRequest) returns (types.StatusResponse);
+  /// Authenticate an user and return its token
+  rpc Authenticate(AuthRequest) returns (AuthResponse);
+
+  /// Verify the authenticity of a token
+  /// Returns OK if the token is valid, INVALID_TOKEN if the token is invalid
+  rpc VerifyToken(TokenRequest) returns (types.StatusResponse);
+
+  /// Invalidate a given token
+  rpc InvalidateSession(TokenRequest) returns (types.StatusResponse);
 }
 
 /// Authentication request payload
 message AuthRequest {
-    string email = 1;
-    string password = 2;
+  string email = 1;
+  string password = 2;
 }
 
 /// Server response for the GRPC auth service
 message AuthResponse {
-    types.StatusResponse status = 1;
-    optional string token = 2;
+  types.StatusResponse status = 1;
+  optional string token = 2;
 }
 
-/// Request to check a token validation
-message VerificationRequest {
-    string token = 1;
-}
+/// Request to check a token validation or invalidate a token
+message TokenRequest { string token = 1; }
 
 /// JWT token payload (registered + custom claims)
 /// Contains the information of the authenticated specialist
 message TokenPayload {
-    sint64 exp = 1;
-    sint64 iat = 2;
-    model.Specialist specialist = 4;
+  sint64 exp = 1;
+  sint64 iat = 2;
+  model.Specialist specialist = 4;
 }
