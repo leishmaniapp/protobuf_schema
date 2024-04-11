@@ -10,22 +10,46 @@ import "types.proto";
 
 /// Specialist information
 message Specialist {
+
+    /// Reserved for the password_hash if required
+    reserved 3;
+
+    /// Specialist with password
+    message WithCredentials {
+        /// Unique specialist key
+        string email = 1;
+        /// Show name
+        string name = 2;
+        // BCrypt password hash
+        string password_hash = 3;
+        /// List of valid diseases
+        repeated string diseases = 4;
+    }
+
+    /// Specialist without the diseases
+    message Record {
+        /// Reserved for diseases and password_hash fields
+        reserved 3, 4;
+
+        /// Unique specialist key
+        string email = 1;
+        /// Show name
+        string name = 2;
+    }
+
+    /// Unique specialist key
     string email = 1;
+    /// Show name
     string name = 2;
-    repeated string diseases = 3;
+    /// List of valid diseases
+    repeated string diseases = 4;
 }
 
 /// Diagnosis information
 message Diagnosis {
 
-    /// Specialist without allowed diseases
-    message SimpleSpecialist {
-        string email = 1;
-        string name = 2;
-    }
-
     /// Different results for diagnosis
-    message DiagnosisResults {
+    message Results {
         /// Positive or negative diagnosis given by the specialist
         bool specialist_result = 1;
         /// Name of the element and total amount of that element found
@@ -41,15 +65,17 @@ message Diagnosis {
     /// Disease identifier
     string disease = 2;
     /// Specialist email and name
-    SimpleSpecialist specialist = 3;
-    // Patient identification encoded for privacy
+    Specialist.Record specialist = 3;
+    /// Patient identification encoded for privacy
     string patient_hash = 4;
+    /// Amount of samples used for this diagnosis
+    uint32 samples = 5;
     /// DateTime in Unix time encoding
-    sint64 date = 5;
+    sint64 date = 6;
     /// Specialist remarks
-    optional string remarks = 6;
+    optional string remarks = 7;
     /// Results (true/false) and quantities
-    DiagnosisResults results = 7;
+    Results results = 8;
 }
 
 /// Image sample metadata
