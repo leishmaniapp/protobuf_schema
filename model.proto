@@ -11,8 +11,8 @@ import "types.proto";
 /// Specialist information
 message Specialist {
 
-    /// Reserved for the password_hash if required
-    reserved 3;
+    /// Reserved for the password_hash and token if required
+    reserved 3,5;
 
     /// Specialist with password
     message WithCredentials {
@@ -24,12 +24,14 @@ message Specialist {
         string password_hash = 3;
         /// List of valid diseases
         repeated string diseases = 4;
+        /// Current validated JWT token if present
+        optional string token = 5;
     }
 
     /// Specialist without the diseases
     message Record {
-        /// Reserved for diseases and password_hash fields
-        reserved 3, 4;
+        /// Reserved for diseases, password_hash and token fields
+        reserved 3,4,5;
 
         /// Unique specialist key
         string email = 1;
