@@ -10,7 +10,7 @@ import "model.proto";
 import "types.proto";
 
 /// Sample manipulation service
-service SampleService {
+service SamplesService {
     /// Store the given sample in storage
     rpc StoreImageSample(ImageSampleRequest) returns (types.StatusResponse);
     /// Update sample data on storage
