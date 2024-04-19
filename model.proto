@@ -11,106 +11,108 @@ import "types.proto";
 /// Specialist information
 message Specialist {
 
-    /// Reserved for the password_hash and token if required
-    reserved 3,5;
+  /// Reserved for the password_hash and token if required
+  reserved 3, 5;
 
-    /// Specialist with password
-    message WithCredentials {
-        /// Unique specialist key
-        string email = 1;
-        /// Show name
-        string name = 2;
-        // BCrypt password hash
-        string password_hash = 3;
-        /// List of valid diseases
-        repeated string diseases = 4;
-        /// Current validated JWT token if present
-        optional string token = 5;
-    }
+  /// Specialist with password
+  message WithCredentials {
+    /// Unique specialist key
+    string email = 1;
+    /// Show name
+    string name = 2;
+    // BCrypt password hash
+    string password_hash = 3;
+    /// List of valid diseases
+    repeated string diseases = 4;
+    /// Current validated JWT token if present
+    optional string token = 5;
+  }
 
-    /// Specialist without the diseases
-    message Record {
-        /// Reserved for diseases, password_hash and token fields
-        reserved 3,4,5;
-
-        /// Unique specialist key
-        string email = 1;
-        /// Show name
-        string name = 2;
-    }
+  /// Specialist without the diseases
+  message Record {
+    /// Reserved for diseases, password_hash and token fields
+    reserved 3, 4, 5;
 
     /// Unique specialist key
     string email = 1;
     /// Show name
     string name = 2;
-    /// List of valid diseases
-    repeated string diseases = 4;
+  }
+
+  /// Unique specialist key
+  string email = 1;
+  /// Show name
+  string name = 2;
+  /// List of valid diseases
+  repeated string diseases = 4;
 }
 
 /// Diagnosis information
 message Diagnosis {
 
-    /// Different results for diagnosis
-    message Results {
-        /// Positive or negative diagnosis given by the specialist
-        bool specialist_result = 1;
-        /// Name of the element and total amount of that element found
-        map<string, int32> specialist_elements = 2;
-        /// Positive or negative diagnosis given by the model
-        bool model_result = 3;
-        /// Name of the element and total amount of that element found
-        map<string, int32> model_elements = 4;
-    }
+  /// Different results for diagnosis
+  message Results {
+    /// Positive or negative diagnosis given by the specialist
+    bool specialist_result = 1;
+    /// Name of the element and total amount of that element found
+    map<string, int32> specialist_elements = 2;
+    /// Positive or negative diagnosis given by the model
+    bool model_result = 3;
+    /// Name of the element and total amount of that element found
+    map<string, int32> model_elements = 4;
+  }
 
-    /// UUID identifier
-    string id = 1;
-    /// Disease identifier
-    string disease = 2;
-    /// Specialist email and name
-    Specialist.Record specialist = 3;
-    /// Patient identification encoded for privacy
-    string patient_hash = 4;
-    /// Amount of samples used for this diagnosis
-    uint32 samples = 5;
-    /// DateTime in Unix time encoding
-    sint64 date = 6;
-    /// Specialist remarks
-    optional string remarks = 7;
-    /// Results (true/false) and quantities
-    Results results = 8;
+  /// UUID identifier
+  string id = 1;
+  /// Disease identifier
+  string disease = 2;
+  /// Specialist email and name
+  Specialist.Record specialist = 3;
+  /// Patient identification encoded for privacy
+  string patient_hash = 4;
+  /// Amount of samples used for this diagnosis
+  uint32 samples = 5;
+  /// DateTime in Unix time encoding
+  sint64 date = 6;
+  /// Specialist remarks
+  optional string remarks = 7;
+  /// Results (true/false) and quantities
+  Results results = 8;
 }
 
 /// Image sample metadata
 message ImageMetadata {
-    /// Diagnosis UUID
-    string diagnosis = 1;
-    /// Sample number in diagnosis
-    uint32 sample = 2;
-    /// Disease identifier
-    string disease = 3;
-    /// DateTime in Unix time encoding
-    sint64 date = 4;
-    /// Sample size in pixels (only one side - height and width must be equal
-    uint32 size = 5;
+  /// Diagnosis UUID
+  string diagnosis = 1;
+  /// Sample number in diagnosis
+  uint32 sample = 2;
+  /// Disease identifier
+  string disease = 3;
+  /// DateTime in Unix time encoding
+  sint64 date = 4;
+  /// Sample size in pixels (only one side - height and width must be equal
+  uint32 size = 5;
 }
 
 /// Current analysis stage
 enum AnalysisStage {
-    reserved 1;
-    
-    /// Failed to process sample
-    ERROR = 0;
-    /// Sent to Diagnosis Queue System but still no response
-    ANALYZING = 2;
-    /// Sample was analyzed but still not delivered to client
-    DELIVER = 3;
-    /// Sample was successfully analyzed and delivered
-    ANALYZED = 4;
+  reserved 1;
+
+  /// Failed to process sample
+  ERROR = 0;
+  /// Sent to Diagnosis Queue System but still no response
+  ANALYZING = 2;
+  /// Sample was analyzed but still not delivered to client
+  DELIVER = 3;
+  /// Sample was successfully analyzed and delivered
+  ANALYZED = 4;
 }
 
 /// Image sample with results
 message Sample {
-    ImageMetadata metadata = 1;
-    AnalysisStage stage = 2;
-    map<string, types.ListOfCoordinates> results = 3;
+  ImageMetadata metadata = 1;
+  AnalysisStage stage = 2;
+  /// Whose the sample belongs to
+  Specialist.Record specialist = 3;
+  map<string, types.ListOfCoordinates> results = 4;
 }
