@@ -9,39 +9,41 @@ option go_package = "leishmaniapp.cloud;proto";
 /// Error codes for the [leishmaniapp.types.StatusResponse]
 /// Same as HTTP status codes + Extras
 enum StatusCode {
-    UNSPECIFIED = 0;
-    OK = 200;
-    BAD_REQUEST = 400;
-    /// Bad credentials for authentication
-    FORBIDDEN = 403;
-    /// No authentication header provided
-    UNAUTHENTICATED = 401;
-    /// The requested resources did not exist or was not found
-    NOT_FOUND = 404;
-    /// Authentication header was provided but the token was invalid
-    INVALID_TOKEN = 498;
-    INTERNAL_SERVER_ERROR = 500;
+  UNSPECIFIED = 0;
+  OK = 200;
+  BAD_REQUEST = 400;
+  /// Bad credentials for authentication
+  FORBIDDEN = 403;
+  /// No authentication header provided
+  UNAUTHENTICATED = 401;
+  /// The requested resources did not exist or was not found
+  NOT_FOUND = 404;
+  /// ┐(￣ヘ￣;)┌
+  IM_A_TEAPOD = 418;
+  /// The analysis model failed to process the sample
+  UNPROCESSABLE_CONTENT = 422;
+  /// Authentication header was provided but the token was invalid
+  INVALID_TOKEN = 498;
+  INTERNAL_SERVER_ERROR = 500;
 }
 
 /// Return a status code with an optional description of the error
 message StatusResponse {
-    StatusCode code = 1;
-    optional string description = 2;
+  StatusCode code = 1;
+  optional string description = 2;
 }
 
 /// Image metadata
 message ImageBytes {
-    bytes data = 3;
-    string mime = 4;
+  bytes data = 3;
+  string mime = 4;
 }
 
 /// Pixel coordinates of an element in an image
 message Coordinates {
-    uint32 x = 1;
-    uint32 y = 2;
+  uint32 x = 1;
+  uint32 y = 2;
 }
 
 /// Wrapper around coordinates for maps
-message ListOfCoordinates {
-    repeated Coordinates coordinates = 1;
-}
+message ListOfCoordinates { repeated Coordinates coordinates = 1; }
