@@ -20,6 +20,7 @@ message AnalysisRequest {
 }
 
 message AnalysisResponse {
-    model.ImageMetadata metadata = 1;
-    map<string, types.ListOfCoordinates> results = 2;
+    types.StatusResponse status = 1;
+    optional model.ImageMetadata metadata = 2;
+    map<string, types.ListOfCoordinates> results = 3;
 }
