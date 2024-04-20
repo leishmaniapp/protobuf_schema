@@ -96,10 +96,10 @@ message ImageMetadata {
 
 /// Current analysis stage
 enum AnalysisStage {
-  reserved 1;
-
   /// Failed to process sample
   ERROR = 0;
+  /// Failed to process samples (delivery is required)
+  ERROR_DELIVER = 1;
   /// Sent to Diagnosis Queue System but still no response
   ANALYZING = 2;
   /// Sample was analyzed but still not delivered to client
