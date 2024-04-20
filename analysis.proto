@@ -17,10 +17,13 @@ service AnalysisService {
 message AnalysisRequest {
     model.ImageMetadata metadata = 1;
     types.ImageBytes image = 2;
+
+    /// Issuer of the request
+    model.Specialist.Record specialist = 3;
 }
 
 message AnalysisResponse {
     types.StatusResponse status = 1;
-    optional model.ImageMetadata metadata = 2;
-    map<string, types.ListOfCoordinates> results = 3;
+    /// Newly constructed sample with corresponding results
+    optional model.Sample.WithoutStage sample = 2;
 }
