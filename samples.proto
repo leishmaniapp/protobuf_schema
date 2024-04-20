@@ -19,6 +19,9 @@ service SamplesService {
     rpc GetSample(SampleRequest) returns (SampleResponse);
     /// Delete a specific sample
     rpc DeleteSample(SampleRequest) returns (SampleResponse);
+
+    /// Get samples in DELIVER stage for a given specialist
+    rpc GetUndeliveredBySpecialist(UndeliveredRequest) returns (UndeliveredResponse);
 }
 
 message ImageSampleRequest {
@@ -39,4 +42,14 @@ message SampleResponse {
     
     types.StatusResponse status = 1;
     optional model.Sample sample = 2;
+}
+
+message UndeliveredRequest {
+    /// Specialist email
+    string specialist = 1;
+}
+
+message UndeliveredResponse {
+    types.StatusResponse status = 1;
+    repeated model.Sample samples = 2;
 }
