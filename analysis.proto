@@ -26,4 +26,7 @@ message AnalysisResponse {
     types.StatusResponse status = 1;
     /// Newly constructed sample with corresponding results
     optional model.Sample.WithoutStage sample = 2;
+
+    /// Destination of the request
+    model.Specialist.Record specialist = 3;
 }
