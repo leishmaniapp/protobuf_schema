@@ -28,5 +28,5 @@ message AnalysisResponse {
     optional model.Sample.WithoutStage sample = 2;
 
     /// Destination of the request
-    model.Specialist.Record specialist = 3;
+    string specialist = 3;
 }
