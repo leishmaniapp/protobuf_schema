@@ -120,10 +120,18 @@ message Sample {
   message WithoutStage {
     /// Space reserved for the stage
     reserved 2;
-
+    
     ImageMetadata metadata = 1;
-    /// Whose the sample belongs to
     Specialist.Record specialist = 3;
     map<string, types.ListOfCoordinates> results = 4;
+  }
+  
+  /// Sample without strage or results because of an error
+  message WithError {
+    /// Space reserved for the stage and results
+    reserved 2, 4;
+
+    ImageMetadata metadata = 1;
+    Specialist.Record specialist = 3;
   }
 }

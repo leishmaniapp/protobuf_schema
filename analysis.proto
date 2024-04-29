@@ -24,9 +24,12 @@ message AnalysisRequest {
 
 message AnalysisResponse {
     types.StatusResponse status = 1;
-    /// Newly constructed sample with corresponding results
-    optional model.Sample.WithoutStage sample = 2;
 
-    /// Destination of the request
-    optional model.Specialist.Record specialist = 3;
+    oneof sample {
+        /// Newly constructed sample with corresponding results
+        model.Sample.WithoutStage ok = 2;
+
+        /// A sample error
+        model.Sample.WithError error = 3;
+    }
 }
