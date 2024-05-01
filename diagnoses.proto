@@ -22,6 +22,6 @@ message DiagnosisRequest {
 }
 
 message DiagnosisResponse {
-    types.StatusResponse response = 1;
+    types.StatusResponse status = 1;
     optional model.Diagnosis diagnosis = 2;
 }
