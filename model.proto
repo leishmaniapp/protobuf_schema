@@ -82,6 +82,8 @@ message Diagnosis {
 
 /// Image sample metadata
 message ImageMetadata {
+  // Removed image size
+  reserved 5;
   /// Diagnosis UUID
   string diagnosis = 1;
   /// Sample number in diagnosis
@@ -90,8 +92,6 @@ message ImageMetadata {
   string disease = 3;
   /// DateTime in Unix time encoding
   sint64 date = 4;
-  /// Sample size in pixels (only one side - height and width must be equal
-  uint32 size = 5;
 }
 
 /// Current analysis stage
