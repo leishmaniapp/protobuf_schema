@@ -19,7 +19,7 @@ service AuthService {
   /// Returns OK if the token is valid, INVALID_TOKEN if the token is invalid
   rpc VerifyToken(TokenRequest) returns (types.StatusResponse);
 
-  /// Invalidate a given token
+  /// Invalidate a given token (Only 1 token is valid at a given time)
   rpc InvalidateSession(TokenRequest) returns (types.StatusResponse);
 }
 
@@ -41,7 +41,9 @@ message TokenRequest { string token = 1; }
 /// JWT token payload (registered + custom claims)
 /// Contains the information of the authenticated specialist
 message TokenPayload {
-  sint64 exp = 1;
+  /// Previous version had expiration time, now tokens do not expire
+  reserved 1;
+
   sint64 iat = 2;
   model.Specialist specialist = 4;
 }
