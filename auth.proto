@@ -21,6 +21,9 @@ service AuthService {
 
   /// Invalidate a given token (Only 1 token is valid at a given time)
   rpc InvalidateSession(TokenRequest) returns (types.StatusResponse);
+
+  /// Decode token contents
+  rpc DecodeToken(TokenRequest) returns (DecodeResponse);
 }
 
 /// Authentication request payload
@@ -46,4 +49,10 @@ message TokenPayload {
 
   sint64 iat = 2;
   model.Specialist specialist = 4;
+}
+
+/// [DecodeToken] response
+message DecodeResponse {
+  types.StatusResponse status = 1;
+  optional TokenPayload payload = 2;
 }
