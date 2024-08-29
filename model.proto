@@ -115,17 +115,20 @@ message Sample {
   /// Whose the sample belongs to
   Specialist.Record specialist = 3;
   map<string, types.ListOfCoordinates> results = 4;
+  /// Analysis model version
+  string version = 5;
 
   /// A sample without a stage
   message WithoutStage {
     /// Space reserved for the stage
     reserved 2;
-    
+
     ImageMetadata metadata = 1;
     Specialist.Record specialist = 3;
     map<string, types.ListOfCoordinates> results = 4;
+    string version = 5;
   }
-  
+
   /// Sample without strage or results because of an error
   message WithError {
     /// Space reserved for the stage and results
@@ -133,5 +136,6 @@ message Sample {
 
     ImageMetadata metadata = 1;
     Specialist.Record specialist = 3;
+    string version = 5;
   }
 }
