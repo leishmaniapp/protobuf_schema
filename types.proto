@@ -39,10 +39,12 @@ message ImageBytes {
   string mime = 4;
 }
 
-/// Pixel coordinates of an element in an image
+/// Pixel coordinates of bounding box and its dimentions
 message Coordinates {
   uint32 x = 1;
   uint32 y = 2;
+  uint32 w = 3;
+  uint32 h = 4;
 }
 
 /// Wrapper around coordinates for maps
